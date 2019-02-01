@@ -15,4 +15,16 @@ public class SubResource {
         this.httpMethod = httpMethod;
         this.method = method;
     }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public HttpMethod getHttpMethod() {
+        return httpMethod;
+    }
+
+    public Method getMethod() {
+        return method;
+    }
 }

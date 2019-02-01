@@ -3,12 +3,12 @@ package net.digital15.goliath;
 import net.digital15.goliath.annotations.Method;
 import net.digital15.goliath.annotations.Path;
 
-@Path("/hello")
-public class TestResource {
+@Path
+public class AnotherTestResource {
 
-    @Path("/test")
-    @Method(HttpMethod.POST)
+    @Path
+    @Method(HttpMethod.GET)
     public void test() {
-        System.out.println("TEST!");
+
     }
 }
