@@ -5,12 +5,11 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.http.HttpServerCodec;
-import io.netty.handler.codec.http.HttpServerExpectContinueHandler;
+import io.netty.handler.codec.http.*;
 
 public class Goliath {
 
-    private final int PORT = 80;
+    private final int PORT = 8080;
 
     public static void main(String[] args) {
         new Goliath().createBootstrap();
@@ -42,8 +41,9 @@ public class Goliath {
         @Override
         protected void initChannel(SocketChannel channel) {
             ChannelPipeline pipeline = channel.pipeline();
-            pipeline.addLast(new HttpServerCodec());
-            pipeline.addLast(new HttpServerExpectContinueHandler());
+            pipeline.addLast("encoder", new HttpResponseEncoder());
+            pipeline.addLast("decoder", new HttpRequestDecoder());
+            pipeline.addLast("aggregator", new HttpObjectAggregator(1048576));
             pipeline.addLast(new InboundHandler());
         }
     }
